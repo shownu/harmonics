@@ -14,7 +14,7 @@ finally convert to table and save as .xlsm
 import json
 import csv
 
-doctitle = 'minch-2019-10-31T08_58_28Z-2019-10-31T08_59_56Z.json'
+doctitle = 'XXXXXXXXXXXXXXX.json'
 
 nos_to_skip = {}
 
