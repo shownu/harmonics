@@ -3,7 +3,7 @@ import csv
 
 nos_to_skip = {45, 48, 56, 59, 70, 373, 383, 393, 403, 413, 424, 434, 578, 582, 610, 611, 660, 663, 674, 822, 857, 973, 984}
 
-with open('minch-1-Nov-2019.json', newline='') as f:
+with open('XXXXXXXXX.json', newline='') as f:
     resp_dict = json.load(f)
 
     print(range(len(resp_dict)))
