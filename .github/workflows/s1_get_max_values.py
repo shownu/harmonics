@@ -24,5 +24,5 @@ for i in range(0,tot_time):
                                      "level":[largest_level]}))
 
 ex = ex.sort_values(by=['time', 'beam', 'frequency'])
-ex.to_csv(r'P:\Projects\2019\PT13_MEDUSA\05_Model\Laura Test Area\get max\output.csv', index=None, header=True)
+ex.to_csv(r'XXXXXXXXXXXXXXX\get max\output.csv', index=None, header=True)
 print("100 % complete!")
