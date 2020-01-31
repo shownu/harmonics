@@ -26,7 +26,7 @@ check <- function(t) {
   p
 }
 
-check(sample(1:3282,1)) ## a random time
+check(sample(1:3282,1)) ## choose random time
 
 ## for lines (looks awful)
   main <- paste("Variation in level by beam at", time, "- the darker a line, the higher its frequency...", sep=" ")
