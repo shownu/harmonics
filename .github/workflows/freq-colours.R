@@ -45,7 +45,7 @@ theme_black = function(base_size = 12, base_family = "") {
       plot.title = element_text(size = base_size*1.2, color = "white"),  
       plot.margin = unit(rep(1, 4), "lines")
     )
-  
+   
 }
 
 by_beam <- function(dat) {
