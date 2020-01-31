@@ -1,5 +1,3 @@
-# -*- coding: utf-8 -*-
-"""
 import pandas as pd
 import numpy as np
 import random
@@ -94,4 +92,4 @@ for i in range(0, 50):
                 len_f = 0
         
 print(ex)
-ex.to_csv(r'P:\Projects\2019\PT13_MEDUSA\05_Model\Laura Test Area\get max\output.csv', index=None, header=True)
+ex.to_csv(r'XXXXXXXXXXXXXXX\get max\output.csv', index=None, header=True)
