@@ -1,7 +1,6 @@
 nice_plot <- function(X, min=NULL, max=NULL, beams=NULL) {
   y <- X[,1] # first col with times
   times <- as.numeric(unlist(y))
-  #  goodtimes <- seconds_to_period(times)
   freqs <- X[,-1] # count beams
   tot <- length(freqs)
   beam <- seq(0,tot-1,by=1)
