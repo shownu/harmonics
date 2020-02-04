@@ -21,7 +21,7 @@ print("working...")
 
 all_sec_values = from_csv.time.unique()
 
-for i in range(0, 50):
+for i in range(0, len(all_sec_values):
     sec_value = all_sec_values[i]
     sec_df = from_csv[from_csv['time'] == sec_value]    
     all_beam_values = sec_df.beam.unique()
