@@ -12,6 +12,9 @@ for i in range(len(all_beam_values)):
     beam_value = all_beam_values[i]
     beam_df = df[df['beam'] == beam_value]
     f = beam_df['fundamental'].unique().tolist()
+    f = np.sort(f)
+    f = f.tolist()
+#    print("in beam", beam_value, "initially", f)
     j = 0
     while j < len(f):
         sig_freq = f[j]              
