@@ -1,7 +1,8 @@
 library(readr)
-dat <- read_csv("~/full dataset (open in notepad).csv", col_names = FALSE)
+dat <- read_csv("~/XXXXXXXXXXXXXXXXX.csv", col_names = FALSE)
 library(ggplot2)
 library(plotly)
+library(viridis)
 
 hms <- function(t){
   paste(formatC(t %/% (60*60) %% 24, width = 2, format = "d", flag = "0")
@@ -11,14 +12,13 @@ hms <- function(t){
   )
 }
 
-## check is a function taking values from 1 to 3282 inclusive, from 8:06:28 to 15:49:00
-check <- function(t) {
-  newer <- split(dat,dat$X1)
+check <- function(dat, t) {
+  newer <- split(dat,dat$time)
   new <- newer[[t]]
-  beam <- new$X2
-  level <- new$X4
-  freq <- factor(new$X3)
-  time <- hms(new$X1[1])
+  beam <- new$beam
+  level <- new$level
+  freq <- factor(new$frequency)
+  time <- hms(new$time[1])
   main <- paste("Variation in level by beam at", time, "- the darker a point, the higher its frequency...", sep=" ")
   p <- ggplot(new, aes(beam, level), group=freq) + ggtitle(main) + geom_point(aes(color = freq)) + 
     scale_color_viridis(discrete=TRUE, option = "D", direction=-1) + theme_minimal()
@@ -26,14 +26,6 @@ check <- function(t) {
   p
 }
 
-check(sample(1:3282,1)) ## choose random time
+max <- length(unique(dat$time))
 
-## for lines (looks awful)
-  main <- paste("Variation in level by beam at", time, "- the darker a line, the higher its frequency...", sep=" ")
-  p <- ggplot(new, aes(beam, level), group=freq) + ggtitle(main) + geom_point(aes(color = freq)) + 
-    scale_color_viridis(discrete=TRUE, option = "D", direction=-1) + theme_minimal()
-  
-## for points (much better)
-  main <- paste("Variation in level by beam at", time, "- the darker a point, the higher its frequency...", sep=" ")
-  p <- ggplot(new, aes(beam, level), group=freq) + ggtitle(main) + geom_point(aes(color = freq)) + 
-    scale_color_viridis(discrete=TRUE, option = "D", direction=-1) + theme_minimal()
+check(sample(1:max,1)) ## choose random time
