@@ -1,6 +1,6 @@
 ## data conversion
 
-consolidate_harmonics.py TO SHOW TRUE HARMONICS EVERY 8 TIME PERIODS
+consolidate_harmonics.py TO SHOW TRUE HARMONICS EVERY x TIME PERIODS
 s0_json_to_csv.py OR octave_json_to_csv.py TO CONVERT JSON TO CSV
 get_max_values.py TO GET MAX LEVEL FOR EACH TIME/BEAM COMBO
 extract_harmonics.py TO EXTRACT HARMONICS FROM CSV RESULTING FROM S1
