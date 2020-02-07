@@ -55,7 +55,7 @@ by_beam <- function(dat) {
   main <- paste("variation in frequency over time, colour-coded by beam", sep=" ")
   p <- ggplot(dat, aes(freq, time), group=beam) + ggtitle(main) + geom_point(aes(color = beam), size = 0.7) + 
     scale_color_viridis(discrete=FALSE, option = "D", direction=-1) +
-    theme_black() + labs(x = "frequency (Hz)", y = "time (sec)")
+    theme_black() + labs(x = "frequency (Hz)", y = "time (sec)") + xlim(0, 70)
   p <- ggplotly(p)
   p
 }
