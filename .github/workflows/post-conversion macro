@@ -1,0 +1,25 @@
+Option Explicit
+
+Sub dateandtime()
+
+Dim i As Long
+Dim strDate, strTime As String
+Dim finalrow As Long
+
+Rows("1:1").Insert Shift:=xlDown, CopyOrigin:=xlFormatFromLeftOrAbove
+finalrow = Range("B2").End(xlDown).Row
+Columns("C:C").Insert Shift:=xlToRight, CopyOrigin:=xlFormatFromLeftOrAbove
+Range("B1") = "date"
+Range("C1") = "time"
+
+For i = 2 To finalrow
+
+    strDate = Cells(i, 2).Text
+    strTime = Mid(strDate, 12, 8)
+    strDate = Left(strDate, 10)
+    Cells(i, 2) = strDate
+    Cells(i, 3) = strTime
+
+Next i
+
+End Sub
