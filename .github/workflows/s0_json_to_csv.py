@@ -6,9 +6,7 @@ if code stops running with KeyError: 'OCTAVE_A', add the next number into nos_to
 then uncomment print(range(len(resp_dict))) and run. second number should be 1+ the above
 now comment previously uncommented lines 
 and uncomment lines which don't start with print
-and run to output to excel
-insert row at the top of excel file with appropriate titles
-finally convert to table and save as .xlsm
+run to output to excel
 """
 
 import json
