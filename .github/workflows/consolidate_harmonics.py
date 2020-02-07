@@ -1,19 +1,24 @@
 import pandas as pd
 import numpy as np
 import time
+
+min_fundamental = 5
+group_size = 6
       
-from_csv = pd.read_csv(r'P:\Projects\2019\PT13_MEDUSA\05_Model\Laura Test Area\04 EXTRACT HARMONICS\harmonics NOV 1.csv')
-orig = from_csv[from_csv.fundamental > 3]
+from_csv = pd.read_csv(r'P:\Projects\2019\PT13_MEDUSA\05_Model\Laura Test Area\04 EXTRACT HARMONICS\harmonics OCT 31.csv')
+orig = from_csv[from_csv.fundamental > min_fundamental]
 orig = orig.sort_values(by=['time'])
 
 while not orig.empty:
-    group = orig.head(8)
+    group = orig.head(group_size)
     sec_values = group.time.tolist()
     final = len(sec_values) - 1
     start_time = time.strftime('%H:%M:%S', time.gmtime(sec_values[0]))
     end_time = time.strftime('%H:%M:%S', time.gmtime(sec_values[final]))
+    elapsed = sec_values[final] - sec_values[0]
+    elapsed = time.strftime('%H h %M min %S sec', time.gmtime(elapsed))
     print("-------------")
-    print("from", start_time, "to", end_time)
+    print("from", start_time, "to", end_time, "-", elapsed)
     print("")
     df = orig[orig.time.isin(sec_values)]
     all_beam_values = df.beam.unique()
