@@ -12,12 +12,9 @@ max_sec = min(orig['time']) + time_period
 
 while not orig.empty:
     group = orig[orig.time <= max_sec]
-    sec_values = [max_sec-time_period, max_sec]
-    final = len(sec_values) - 1
-    start_time = time.strftime('%H:%M:%S', time.gmtime(sec_values[0]))
-    end_time = time.strftime('%H:%M:%S', time.gmtime(sec_values[final]))
-    elapsed = sec_values[final] - sec_values[0]
-    elapsed = time.strftime('%M m %S s', time.gmtime(elapsed))
+    start_time = time.strftime('%H:%M:%S', time.gmtime(max_sec-time_period))
+    end_time = time.strftime('%H:%M:%S', time.gmtime(max_sec))
+    elapsed = time.strftime('%M m %S s', time.gmtime(time_period))
     print("-------------")
     print("from", start_time, "to", end_time, "-", elapsed)
     print("")
@@ -34,7 +31,7 @@ while not orig.empty:
             f = beam_df['fundamental'].unique().tolist()
             f = np.sort(f)
             f = f.tolist()
-#        print("at beam", beam_value, "initially", f)
+#            print("at beam", beam_value, "initially", f)
             j = 0
             while j < len(f):
                 sig_freq = f[j]              
