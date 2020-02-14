@@ -1,6 +1,5 @@
 import math
 import wave
-import time
 from scipy.io import wavfile
 import numpy as np
 from matplotlib import pyplot as plt
