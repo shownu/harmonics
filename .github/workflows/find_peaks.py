@@ -70,26 +70,28 @@ min_samples = samples_at_distance(2000)
 cepstrum_output = np.zeros(int(fftsize))
 samples_with_peak = []
 now_vs_next = []
+bool_plot = False
 
 for z in range(no_averages,int(no_frames/fftsize)-no_averages):
-    print (z)
     for y in range (-no_averages, 0):
         timeseries = amplitudes[int((z-y)*fftsize):int((z-y+1)*fftsize)]
         cepstrum_output += real_cepstrum(timeseries)
     cepstrum_output = cepstrum_output/no_averages
     # Make a plot of averaged cepstrum
-    plt.figure(figsize=(15,5))
-    plt.plot(cepstrum_output[min_samples:max_samples])
-    plt.ylabel('Real Cepstrum')
-    plt.xlabel('Samples')
-    plt.grid(color='tab:gray', which='both', linestyle='--', linewidth=1)
-    plt.show()
+    if bool_plot == True:
+        print (z)
+        plt.figure(figsize=(15,5))
+        plt.plot(cepstrum_output[min_samples:max_samples])
+        plt.ylabel('Real Cepstrum')
+        plt.xlabel('Samples')
+        plt.grid(color='tab:gray', which='both', linestyle='--', linewidth=1)
+        plt.show()
     y = cepstrum_output[min_samples:max_samples]
     x = find_x(y)
     samples_with_peak.append(x)
     
 clean = [x for x in samples_with_peak if x != None]
-clean.reverse()
+# clean.reverse()
 
 for i in range(len(clean) - 1):
     bool_CPA = False
