@@ -38,7 +38,7 @@ def find_x(y):
     threshold = 4*np.std(y)
     peaks = find_peaks(y, height=threshold)
     peak_val = peaks[1]['peak_heights']
-    if peak_val != []:
+    if peak_val.size > 0:
         peak_val = peak_val[0]
 #        print("peak at", peak_val)
         x = np.where(y == peak_val)
@@ -53,10 +53,10 @@ def real_cepstrum(x, n=None):
     ceps_real[0] = 0.0
     return ceps_real
 
-filename = 'XXXXXXXXXXXXXXXXX.wav'
+filename = 'XXXXXXXXXXXXXXXXXXXXX.wav'
 obj = wave.open(filename,'r')
 sample_rate = obj.getframerate()
-nframes = obj.getnframes()
+no_frames = obj.getnframes()
 obj.close() # what does this do?
 
 amplitudes = wavfile.read(filename)[1]
@@ -69,37 +69,48 @@ min_samples = samples_at_distance(2000)
 
 cepstrum_output = np.zeros(int(fftsize))
 samples_with_peak = []
+now_vs_next = []
 
-for z in range(no_averages,int(nframes/fftsize)-no_averages):
+for z in range(no_averages,int(no_frames/fftsize)-no_averages):
     print (z)
-    for y in range (-no_averages,0):
+    for y in range (-no_averages, 0):
         timeseries = amplitudes[int((z-y)*fftsize):int((z-y+1)*fftsize)]
         cepstrum_output += real_cepstrum(timeseries)
     cepstrum_output = cepstrum_output/no_averages
     # Make a plot of averaged cepstrum
-    fig = plt.figure()
+    plt.figure(figsize=(15,5))
     plt.plot(cepstrum_output[min_samples:max_samples])
     plt.ylabel('Real Cepstrum')
     plt.xlabel('Samples')
-    plt.grid(color='tab:gray',  which='both',linestyle='--', linewidth=1)
+    plt.grid(color='tab:gray', which='both', linestyle='--', linewidth=1)
     plt.show()
     y = cepstrum_output[min_samples:max_samples]
     x = find_x(y)
     samples_with_peak.append(x)
     
 clean = [x for x in samples_with_peak if x != None]
-value = 0
+clean.reverse()
+
 for i in range(len(clean) - 1):
     bool_CPA = False
     bool_opening = False
-    bool_closing = False
+    bool_closing = False    
     if clean[i] > clean[i+1]:
-        value = value - 1
+        now_vs_next.append(-1)
         bool_closing = True
-    elif clean[i] == clean[i+1]:
+    elif clean[i] == clean[i+1]:        
+        now_vs_next.append(0)
         bool_CPA = True
     elif clean[i] < clean[i+1]:
-        value = value + 1
+        now_vs_next.append(1)
         bool_opening = True
-    popup()
-    time.sleep(1)
+#    popup()
+#    time.sleep(0.5)
+        
+overall = sum(now_vs_next) # negative sum means most changes were negative ie moving left 
+if overall < 0:
+    print("overall, emitter moving further away")
+elif overall == 0:        
+    print("overall, emitter stationary")
+elif overall > 0:
+    print("overall, emitter moving closer")
