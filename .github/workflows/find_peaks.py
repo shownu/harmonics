@@ -78,7 +78,7 @@ for z in range(no_averages,int(no_frames/fftsize)-no_averages):
     cepstrum_output = cepstrum_output/no_averages
     # Make a plot of averaged cepstrum
     if bool_plot == True:
-        print (z)
+        print(z)
         plt.figure(figsize=(15,5))
         plt.plot(cepstrum_output[min_samples:max_samples])
         plt.ylabel('Real Cepstrum')
