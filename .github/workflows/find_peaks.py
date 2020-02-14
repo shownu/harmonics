@@ -107,10 +107,10 @@ for i in range(len(clean) - 1):
 #    popup()
 #    time.sleep(0.5)
         
-overall = sum(now_vs_next) # negative sum means most changes were negative ie moving left 
-if overall < 0:
-    print("overall, emitter moving further away")
+overall = sum(now_vs_next) 
+if overall < 0: # negative sum means moving left over samples ie away
+    print("overall, emitter moved further away")
 elif overall == 0:        
     print("overall, emitter stationary")
 elif overall > 0:
-    print("overall, emitter moving closer")
+    print("overall, emitter moved closer")
