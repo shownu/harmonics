@@ -1,7 +1,7 @@
 from scipy.io import wavfile
 from matplotlib import pyplot as plt
 from scipy.signal import find_peaks
-from tkinter import Tk, Label
+#from tkinter import Tk, Label
 from pydub import AudioSegment
 from pydub.utils import make_chunks
 import numpy as np
@@ -13,21 +13,21 @@ import math
 import wave
 #import time
  
-def popup():
-    dialog_box = Tk()
-    dialog_box.geometry('160x50+1000+600')
-    if bool_NA == True:
-        title = 'N/A'
-        Label(dialog_box, text = '-----', fg = 'gray', bg = 'gray').place(x = 10, y = 10)    
-    if bool_closing == True:
-        title = 'Closing'
-        Label(dialog_box, text = '-----', fg = 'red', bg = 'red').place(x = 10, y = 10)
-    if bool_CPA == True or bool_opening == True:
-        if bool_CPA == True: title = 'CPA'
-        if bool_opening == True: title = 'Opening'
-        Label(dialog_box, text = '-----', fg = 'limegreen', bg = 'limegreen').place(x = 10, y = 10)
-    Label(dialog_box, text = title).place(x = 50, y = 10)
-    return dialog_box.mainloop()
+#def popup():
+#    dialog_box = Tk()
+#    dialog_box.geometry('160x50+1000+600')
+#    if bool_NA == True:
+#        title = 'N/A'
+#        Label(dialog_box, text = '-----', fg = 'gray', bg = 'gray').place(x = 10, y = 10)    
+#    if bool_closing == True:
+#        title = 'Closing'
+#        Label(dialog_box, text = '-----', fg = 'red', bg = 'red').place(x = 10, y = 10)
+#    if bool_CPA == True or bool_opening == True:
+#        if bool_CPA == True: title = 'CPA'
+#        if bool_opening == True: title = 'Opening'
+#        Label(dialog_box, text = '-----', fg = 'limegreen', bg = 'limegreen').place(x = 10, y = 10)
+#    Label(dialog_box, text = title).place(x = 50, y = 10)
+#    return dialog_box.mainloop()
 
 def samples_at_distance(direct_path):
     speed_of_sound = 1500 # m/s
@@ -62,7 +62,7 @@ def real_cepstrum(x, n = None):
     ceps_real[0] = 0.0
     return ceps_real
 
-filename = 'XXXXXXXXXXXXXXXXX.wav'
+filename = 'XXXXXXXXXXXXXXXXXXXXXXXXX.wav'
 split_into = 8
 
 original_wav = AudioSegment.from_file(filename, "wav")
@@ -134,7 +134,6 @@ for i, chunk in enumerate(chunks):
     #    time.sleep(0.5)
             
     if now_vs_next == []:
-        bool_NA = True
         print("no peaks detected!")
     else:
         print("boxes below track change - red means moving closer, green moving away, and grey stationary. no of peaks found varies with chunk")
