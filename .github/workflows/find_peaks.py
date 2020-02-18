@@ -62,8 +62,10 @@ def real_cepstrum(x, n = None):
     ceps_real[0] = 0.0
     return ceps_real
 
-filename = 'XXXXXXXXXXXXXXXXXXXXXXXXX.wav'
-split_into = 8
+filename = 'test.wav'
+split_into = 4    
+no_averages = 8
+bool_plot = False
 
 original_wav = AudioSegment.from_file(filename, "wav")
 original_wav_length = librosa.get_duration(filename = filename) * 1000 # ms
@@ -85,16 +87,15 @@ for i, chunk in enumerate(chunks):
 
     amplitudes = wavfile.read(chunk_name)[1]
     times = np.arange(len(amplitudes))/float(sample_rate)
-    
-    no_averages = 8
+
     fftsize = sample_rate
+    
     max_samples = samples_at_distance(100)
     min_samples = samples_at_distance(2000)
     
     cepstrum_output = np.zeros(int(fftsize))
     samples_with_peak = []
     now_vs_next = []
-    bool_plot = False
     
     for z in range(no_averages, int(no_frames/fftsize)-no_averages):
         for y in range (-no_averages, 0):
