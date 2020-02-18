@@ -94,7 +94,7 @@ for i, chunk in enumerate(chunks):
     cepstrum_output = np.zeros(int(fftsize))
     samples_with_peak = []
     now_vs_next = []
-    bool_plot = True
+    bool_plot = False
     
     for z in range(no_averages, int(no_frames/fftsize)-no_averages):
         for y in range (-no_averages, 0):
@@ -102,7 +102,7 @@ for i, chunk in enumerate(chunks):
             cepstrum_output += real_cepstrum(timeseries)
         cepstrum_output = cepstrum_output/no_averages
         # Make a plot of averaged cepstrum
-        if bool_plot == False:
+        if bool_plot == True:
             print(z)
             plt.figure(figsize=(15,5))
             plt.plot(cepstrum_output[min_samples:max_samples])
