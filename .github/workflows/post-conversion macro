@@ -5,12 +5,12 @@ Sub dateandtime()
 Dim i As Long
 Dim strDate, strTime As String
 Dim finalrow As Long
+Dim startTime, endTime As String
+Dim doctitle As String
 
 Rows("1:1").Insert Shift:=xlDown, CopyOrigin:=xlFormatFromLeftOrAbove
 finalrow = Range("B2").End(xlDown).Row
 Columns("C:C").Insert Shift:=xlToRight, CopyOrigin:=xlFormatFromLeftOrAbove
-Range("B1") = "date"
-Range("C1") = "time"
 
 For i = 2 To finalrow
 
@@ -21,5 +21,22 @@ For i = 2 To finalrow
     Cells(i, 3) = strTime
 
 Next i
+
+Range("A:B").Delete
+Range("C:C").Delete
+Range("A1") = "time"
+Range("B1") = "beam"
+Range("C1") = "frequency"
+Range("D1") = "level"
+
+startTime = Range("A2").Text
+startTime = Replace(startTime, ":", " ")
+endTime = Range("A2").End(xlDown).Text
+endTime = Replace(endTime, ":", " ")
+doctitle = strDate & " " & startTime & " to " & endTime
+
+Application.DisplayAlerts = False
+ActiveWorkbook.SaveAs filename:=doctitle, FileFormat:=6
+Application.DisplayAlerts = True
 
 End Sub
