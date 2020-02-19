@@ -37,6 +37,7 @@ doctitle = strDate & " " & startTime & " to " & endTime
 
 Application.DisplayAlerts = False
 ActiveWorkbook.SaveAs filename:=doctitle, FileFormat:=6
+ActiveWorkbook.Close savechanges:=True
 Application.DisplayAlerts = True
 
 End Sub
