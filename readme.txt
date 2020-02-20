@@ -2,7 +2,7 @@
 
 s0_json_to_csv.py OR octave_json_to_csv.py TO CONVERT JSON TO CSV. FOLLOW UP WITH post-conversion macro
 get_max_values.py TO GET MAX LEVEL FOR EACH TIME/BEAM COMBO
-extract_harmonics.py TO EXTRACT HARMONICS FROM CSV RESULTING FROM S1
+extract_harmonics.py TO EXTRACT HARMONICS FROM CSV RESULTING FROM GET MAX
 consolidate_harmonics.py TO SHOW TRUE HARMONICS EVERY x TIME PERIODS
 find_peaks.py TO MONITOR EMITTER BEHAVIOUR
 
