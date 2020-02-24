@@ -5,7 +5,7 @@ get_max_values.py TO GET MAX LEVEL FOR EACH TIME/BEAM COMBO
 extract_harmonics.py TO EXTRACT HARMONICS FROM CSV RESULTING FROM GET MAX
 consolidate_harmonics.py TO SHOW TRUE HARMONICS EVERY x TIME PERIODS
 find_peaks.py TO MONITOR EMITTER BEHAVIOUR
-fake_peaks.py GENERATE VESSEL WITHOUT .WAV FILE
+generate_peaks.py GENERATE VESSEL WITHOUT .WAV FILE
 
 ## visualisation using R
 
