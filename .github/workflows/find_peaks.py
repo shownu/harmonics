@@ -4,6 +4,7 @@ from scipy.signal import find_peaks
 #from tkinter import Tk, Label
 from pydub import AudioSegment
 from pydub.utils import make_chunks
+from scipy.signal import savgol_filter
 import numpy as np
 import matplotlib.colors
 import seaborn as sns
@@ -62,8 +63,8 @@ def real_cepstrum(x, n = None):
     ceps_real[0] = 0.0
     return ceps_real
 
-filename = 'test.wav'
-split_into = 4    
+filename = 'sub chunk.wav'
+split_into = 8
 no_averages = 8
 bool_plot = False
 
@@ -96,12 +97,15 @@ for i, chunk in enumerate(chunks):
     cepstrum_output = np.zeros(int(fftsize))
     samples_with_peak = []
     now_vs_next = []
+    first = no_averages
+    last = int(no_frames/fftsize)-no_averages
     
-    for z in range(no_averages, int(no_frames/fftsize)-no_averages):
+    for z in range(first, last):
         for y in range (-no_averages, 0):
             timeseries = amplitudes[int((z-y)*fftsize):int((z-y+1)*fftsize)]
             cepstrum_output += real_cepstrum(timeseries)
         cepstrum_output = cepstrum_output/no_averages
+        cepstrum_output = savgol_filter(cepstrum_output, 21, 3)
         # Make a plot of averaged cepstrum
         if bool_plot == True:
             print(z)
@@ -139,6 +143,7 @@ for i, chunk in enumerate(chunks):
     else:
         print("boxes below track change - red means moving closer, green moving away, and grey stationary. no of peaks found varies with chunk")
         cmap = matplotlib.colors.LinearSegmentedColormap.from_list("", ["limegreen", "gainsboro", "crimson"])
+#        sns.set(rc={'figure.figsize':(20, 0.2)})
         sns.set(rc={'figure.figsize':(20, 0.2)})
         d = {'col1': now_vs_next}
         df = pd.DataFrame(data = d)
