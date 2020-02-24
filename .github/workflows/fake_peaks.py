@@ -1,3 +1,9 @@
+# -*- coding: utf-8 -*-
+"""
+Created on Fri Feb 21 16:44:22 2020
+
+@author: laura.christopher
+"""
 from matplotlib import pyplot as plt
 from scipy.signal import find_peaks
 from scipy.signal import savgol_filter
@@ -54,7 +60,6 @@ def add_vessel(z, dir, bottom_bounce = False):
         y = cepstrum_output[min_samples:max_samples]
     return cepstrum_output, y
 
-no_averages = 8
 bool_plot = True
 
 no_frames = 614400
@@ -66,11 +71,12 @@ min_samples = samples_at_distance(2000)
 
 samples_with_peak = []
 now_vs_next = []
+no_averages = 8
 first = no_averages
 last = int(no_frames/fftsize)-no_averages
 
 for z in range(first, last):
-    cepstrum_output, y = add_vessel(z, dir = 0, bottom_bounce = False)
+    cepstrum_output, y = add_vessel(z, dir = -1, bottom_bounce = False)
     cepstrum_output = savgol_filter(cepstrum_output, 11, 3)
     if bool_plot == True:
         print(z)
@@ -85,19 +91,13 @@ for z in range(first, last):
     
 clean = [x for x in samples_with_peak if x != None]
 
-for i in range(len(clean) - 1):
-    bool_CPA = False
-    bool_opening = False
-    bool_closing = False    
+for i in range(len(clean) - 1): 
     if clean[i] > clean[i+1]:
         now_vs_next.append(-1)
-        bool_opening = True
     elif clean[i] == clean[i+1]:        
         now_vs_next.append(0)
-        bool_CPA = True
     elif clean[i] < clean[i+1]:
         now_vs_next.append(1)
-        bool_closing = True
         
 if now_vs_next == []:
     print("no peaks detected!")
