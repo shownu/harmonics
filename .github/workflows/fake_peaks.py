@@ -1,9 +1,3 @@
-# -*- coding: utf-8 -*-
-"""
-Created on Fri Feb 21 16:44:22 2020
-
-@author: laura.christopher
-"""
 from matplotlib import pyplot as plt
 from scipy.signal import find_peaks
 from scipy.signal import savgol_filter
