@@ -1,4 +1,4 @@
-## data conversion and consolidation
+## data conversion etc
 
 s0_json_to_csv.py OR octave_json_to_csv.py TO CONVERT JSON TO CSV. FOLLOW UP WITH post-conversion macro
 get_max_values.py TO GET MAX LEVEL FOR EACH TIME/BEAM COMBO
