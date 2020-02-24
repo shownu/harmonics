@@ -143,7 +143,6 @@ for i, chunk in enumerate(chunks):
     else:
         print("boxes below track change - red means moving closer, green moving away, and grey stationary. no of peaks found varies with chunk")
         cmap = matplotlib.colors.LinearSegmentedColormap.from_list("", ["limegreen", "gainsboro", "crimson"])
-#        sns.set(rc={'figure.figsize':(20, 0.2)})
         sns.set(rc={'figure.figsize':(20, 0.2)})
         d = {'col1': now_vs_next}
         df = pd.DataFrame(data = d)
