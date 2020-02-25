@@ -75,7 +75,12 @@ for z in range(first, last):
     if bool_plot == True:
         print(z)
         plt.figure(figsize=(15,5))
-        plt.plot(cepstrum_output[min_samples:max_samples])
+        plt.plot(range(min_samples,max_samples), cepstrum_output[min_samples:max_samples])
+        plt.axvline(x = samples_at_distance(100), color='grey')
+        plt.axvline(x = samples_at_distance(200), color='grey')
+        plt.axvline(x = samples_at_distance(500), color='grey')
+        plt.axvline(x = samples_at_distance(1000), color='grey')
+        plt.axvline(x = samples_at_distance(2000), color='grey')
         plt.ylabel('Real Cepstrum')
         plt.xlabel('Samples')
         plt.grid(color='tab:gray', which='both', linestyle='--', linewidth=1)
