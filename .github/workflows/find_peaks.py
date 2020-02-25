@@ -13,6 +13,7 @@ import librosa
 import math
 import wave
 #import time
+from scipy import stats
  
 #def popup():
 #    dialog_box = Tk()
@@ -63,10 +64,10 @@ def real_cepstrum(x, n = None):
     ceps_real[0] = 0.0
     return ceps_real
 
-filename = 'sub chunk.wav'
-split_into = 8
+filename = 'test.wav'
+split_into = 1
 no_averages = 8
-bool_plot = False
+bool_plot = True
 
 original_wav = AudioSegment.from_file(filename, "wav")
 original_wav_length = librosa.get_duration(filename = filename) * 1000 # ms
@@ -87,6 +88,7 @@ for i, chunk in enumerate(chunks):
     obj.close() # what does this do?
 
     amplitudes = wavfile.read(chunk_name)[1]
+    print(stats.describe(amplitudes))
     times = np.arange(len(amplitudes))/float(sample_rate)
 
     fftsize = sample_rate
@@ -106,11 +108,15 @@ for i, chunk in enumerate(chunks):
             cepstrum_output += real_cepstrum(timeseries)
         cepstrum_output = cepstrum_output/no_averages
         cepstrum_output = savgol_filter(cepstrum_output, 21, 3)
-        # Make a plot of averaged cepstrum
         if bool_plot == True:
             print(z)
             plt.figure(figsize=(15,5))
-            plt.plot(cepstrum_output[min_samples:max_samples])
+            plt.plot(range(min_samples,max_samples), cepstrum_output[min_samples:max_samples])
+            plt.axvline(x = samples_at_distance(100), color='grey')
+            plt.axvline(x = samples_at_distance(200), color='grey')
+            plt.axvline(x = samples_at_distance(500), color='grey')
+            plt.axvline(x = samples_at_distance(1000), color='grey')
+            plt.axvline(x = samples_at_distance(2000), color='grey')
             plt.ylabel('Real Cepstrum')
             plt.xlabel('Samples')
             plt.grid(color='tab:gray', which='both', linestyle='--', linewidth=1)
@@ -143,6 +149,7 @@ for i, chunk in enumerate(chunks):
     else:
         print("boxes below track change - red means moving closer, green moving away, and grey stationary. no of peaks found varies with chunk")
         cmap = matplotlib.colors.LinearSegmentedColormap.from_list("", ["limegreen", "gainsboro", "crimson"])
+#        sns.set(rc={'figure.figsize':(20, 0.2)})
         sns.set(rc={'figure.figsize':(20, 0.2)})
         d = {'col1': now_vs_next}
         df = pd.DataFrame(data = d)
