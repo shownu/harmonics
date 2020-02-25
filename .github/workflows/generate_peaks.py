@@ -33,7 +33,7 @@ def find_x(y):
 #        print("at sample", x)
         return x
     
-def add_vessel(z, dir, bottom_bounce = False):
+def add_vessel(z, dir, bottom_bounce = True):
     mean = 0
     variance = 0.0004
     cepstrum_output = np.random.normal(loc=mean, scale=math.sqrt(variance), size=no_frames)
@@ -46,7 +46,7 @@ def add_vessel(z, dir, bottom_bounce = False):
     elif dir == 0: # stationary
         start = 100
         end = 109
-    if bottom_bounce == True:
+    if bottom_bounce == False:
         cepstrum_output[start:end] = [-0.07, -0.1, -0.1, -0.12, -0.15, -0.12, -0.1, -0.1, -0.07]
         y = cepstrum_output[min_samples:max_samples]*-1
     else:
@@ -70,7 +70,7 @@ first = no_averages
 last = int(no_frames/fftsize)-no_averages
 
 for z in range(first, last):
-    cepstrum_output, y = add_vessel(z, dir = -1, bottom_bounce = False)
+    cepstrum_output, y = add_vessel(z, dir = 0, bottom_bounce = True)
     cepstrum_output = savgol_filter(cepstrum_output, 11, 3)
     if bool_plot == True:
         print(z)
