@@ -13,7 +13,6 @@ import librosa
 import math
 import wave
 #import time
-from scipy import stats
  
 #def popup():
 #    dialog_box = Tk()
