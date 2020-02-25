@@ -88,7 +88,6 @@ for i, chunk in enumerate(chunks):
     obj.close() # what does this do?
 
     amplitudes = wavfile.read(chunk_name)[1]
-    print(stats.describe(amplitudes))
     times = np.arange(len(amplitudes))/float(sample_rate)
 
     fftsize = sample_rate
