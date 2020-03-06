@@ -11,9 +11,8 @@ def samples_at_distance(direct_path):
     speed_of_sound = 1500 # m/s
     rx_depth = 100 # m
     em_depth = 100 # m
-    multi_rx = math.sqrt((0.5*direct_path)**2 + rx_depth**2)
-    multi_em = math.sqrt((0.5*direct_path)**2 + em_depth**2)
-    multi = multi_rx + multi_em
+    straight_line =  math.sqrt(direct_path**2 + (em_depth - rx_depth)**2)
+    multi = math.sqrt(straight_line**2 + (em_depth + rx_depth)**2)
 
     path_length_diff = multi - direct_path
     time_delay = path_length_diff / speed_of_sound
